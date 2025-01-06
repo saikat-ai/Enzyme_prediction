@@ -4,3 +4,9 @@
 2. Codes folder contains three files 
 i) Feature.py: to extract subsequence based feature from any given protein sequence
 ii). model.py: train an ensemble classifier and predict the EC number for a given protein sequence
+# Requirements
+numpy
+scikit-learn
+tensorflow
+keras
+LightGBM
