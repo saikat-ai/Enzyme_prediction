@@ -1,4 +1,4 @@
-# Enzyme_prediction
+# SOLVE
 # Enzyme Function Prediction through subsequence tokenization and ensemble learning framework
 1. In Datasets folder contains all the test-dataset for enzyme function prediction in different hierarchy labels
 2. Codes folder contains three files 
