@@ -5,7 +5,7 @@
 - Feature.py: to extract subsequence based feature from any given protein sequence
 - model.py: train an ensemble classifier and predict the EC number for a given protein sequence
 # Requirements
-- numpy
+- numpy = 1.19.5
 - scikit-learn = 0.24.2
-- tensorflow   = 1.19.5
+- tensorflow   = 2.6.2
 - keras        = 2.6.0
