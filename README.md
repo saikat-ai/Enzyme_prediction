@@ -4,6 +4,7 @@
 2. Codes folder contains three files 
 - Feature_extraction.py: to extract subsequence based feature from any given protein sequence
 - train.py: train an ensemble classifier and predict the EC number for a given protein sequence
+- mono-functional_EC.py: Prediction for any unknown protein sequence
 # Usage
 - go to the Prediction folder.
 - download the model.joblib file from google drive
