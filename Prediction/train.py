@@ -62,9 +62,9 @@ def extract_features(df, max_length=500):
     X_4 = tokenizer.texts_to_sequences(df['kmer_4'].values)
     X_4 = pad_sequences(X_4, maxlen=max_length)
 
-    X_5 = tokenizer.fit_on_texts(df['kmer_5'].values)
-    X_5 = tokenizer.texts_to_sequences(df['kmer_5'].values)
-    X_5 = pad_sequences(X_5, maxlen=max_length)
+    #X_5 = tokenizer.fit_on_texts(df['kmer_5'].values)
+    #X_5 = tokenizer.texts_to_sequences(df['kmer_5'].values)
+    #X_5 = pad_sequences(X_5, maxlen=max_length)
 
     # Combine features
     X_combined = np.concatenate([X_3,X_4], axis=1)
