@@ -27,10 +27,10 @@ from sklearn.metrics import precision_score
 from sklearn import preprocessing
 from sklearn.preprocessing import LabelEncoder
 
-df=pd.read_csv('/home/biman/saikat/protein_seq_final/uniprot_unseen/enzyme_l4_upto2023.csv')
+df=pd.read_csv('enzyme_l4_upto2023.csv')
 df1=df.iloc[:,[1,4,5]]
 df1.rename(columns={'Entry': 'identifier','EC number':'class'}, inplace=True)
-# Define a regular expression to match only complete four-digit EC numbers (e.g., 1.1.1.1)
+# Define a regular expression to match only complete four-digit EC numbers 
 ec_pattern = r'^\d+\.\d+\.\d+\.\d+$'
 # Filter the DataFrame to keep only rows with complete four-digit EC numbers
 pivot_df = df1[df1['class'].str.match(ec_pattern, na=False)]
@@ -79,7 +79,7 @@ label_encoder = LabelEncoder()
 # Fit and transform y_data
 y_true = label_encoder.fit_transform(y_data)
 from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(X,y_true,test_size = 0.20,shuffle=True)
+X_train, X_test, y_train, y_test = train_test_split(X_combined, y_true, test_size = 0.10, shuffle=True)
 
 #scaler=MinMaxScaler(feature_range=(-1,1))
 #X_train_scaled=scaler.fit_transform(X_train)
@@ -100,7 +100,7 @@ ensemble_clf = VotingClassifier(estimators=[
     ('decision_tree',dtree),
 ], voting='soft', , weights=[2, 2, 1]) 
 
-ensemble_clf.fit(x1, y_data1) ## Training done
+ensemble_clf.fit(X_train, y_train) ## Training done
 y_pred = ensemble_clf.predict(X_test) ## Prediction
 
 ## PRINT the results
