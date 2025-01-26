@@ -5,7 +5,7 @@
 - Feature_extraction.py: to extract subsequence based feature from any given protein sequence
 - train.py: train an ensemble classifier and predict the EC number for a given protein sequence
 - mono-functional_EC.py: Prediction for any unknown protein sequence
-# Usage
+- # Usage
 - go to the Prediction folder.
 - download the model.joblib file from google drive
 - Then run the enzyme_ec_numbers_with_proba.py (for promiscuous enzyme) or top-5_ec.py (for mono-funcational enzyme) script
