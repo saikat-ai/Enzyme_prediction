@@ -12,9 +12,9 @@
 - When promted, enter the protein sequence in Fasta format (only sequence without any header).the script will process the input sequence and display the top-5 ec numbers along with their probability scores.
 - # Example:
 - Enter the protein sequence in FASTA format (Only sequence, without headers):
-- MVKVYAPASSANMSVGFDVLGAAVTPVDGALLGDVVTVEAAETFSLNNLGQKLLE
+- MVKVYAPASSANMSVGFDVLGAAVTPVDGALLGDVVTVEAAETFSLAAG
 - Predicted EC Numbers:
-- 3.4.21.68 (0.872); 3.4.21.4 (0.765); 3.4.21.92 (0.652); 3.4.21.7 (0.541); 3.4.21.47 (0.433)
+- 3.4.21.68 (0.34); 3.4.21.4 (0.32); 3.4.21.92 (0.38); 3.4.21.7 (0.28); 1.2.3.8 (0.074)
 - Do you want to input another sequence? (yes/no):
 - if yes enter another sequence in same way and if no the program will be ended.
 # Requirements
