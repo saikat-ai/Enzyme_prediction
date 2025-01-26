@@ -8,14 +8,14 @@
 # Usage
 - go to the Prediction folder.
 - download the model.joblib file from google drive
-- Then run the enzyme_ec_prediction.py or  script
-- when promted, enter the protein sequence in Fasta format (only sequence without any header).the script will process the input sequence and display the top-5 ec numbers along with their probability scores.
-- # Example usage:
+- Then run the enzyme_ec_numbers_with_proba.py (for promiscuous enzyme) or top-5_ec.py (for mono-funcational enzyme) script
+- When promted, enter the protein sequence in Fasta format (only sequence without any header).the script will process the input sequence and display the top-5 ec numbers along with their probability scores.
+- # Example:
 - Enter the protein sequence in FASTA format (Only sequence, without headers):
 - MVKVYAPASSANMSVGFDVLGAAVTPVDGALLGDVVTVEAAETFSLNNLGQKLLE
-- # Predicted EC Numbers:
+- Predicted EC Numbers:
 - 3.4.21.68 (0.872); 3.4.21.4 (0.765); 3.4.21.92 (0.652); 3.4.21.7 (0.541); 3.4.21.47 (0.433)
-- # Do you want to input another sequence? (yes/no):
+- Do you want to input another sequence? (yes/no):
 - if yes enter another sequence in same way and if no the program will be ended.
 # Requirements
 - numpy = 1.19.5
