@@ -17,7 +17,6 @@
 - 3.4.21.68 (0.872); 3.4.21.4 (0.765); 3.4.21.92 (0.652); 3.4.21.7 (0.541); 3.4.21.47 (0.433)
 - # Do you want to input another sequence? (yes/no):
 - if yes enter another sequence in same way and if no the program will be ended.
-- 
 # Requirements
 - numpy = 1.19.5
 - scikit-learn = 0.24.2
