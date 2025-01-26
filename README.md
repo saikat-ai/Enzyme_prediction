@@ -13,7 +13,6 @@
 - # Example:
 [1] Enter the protein sequence in FASTA format (Only sequence, without headers):()
     MVKVYAPASSANMSVGFDVLGAAVTPVDGALLGDVVTVEAAETFSLAAG()
-    
 [2] Predicted EC Numbers:
     3.4.21.68 (0.34); 3.4.21.4 (0.32); 3.4.21.92 (0.38); 3.4.21.7 (0.28); 1.2.3.8 (0.074)
 [3] Do you want to input another sequence? (yes/no):
