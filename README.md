@@ -8,7 +8,8 @@
 # Usage
 - go to the Prediction folder.
 - download the model.joblib file from google drive
-- Then run the mono-functional_EC.py code
+- Then run the enzyme_ec_prediction.py script
+     python ec_prediction.py
 - Paste the description of your sequence (for example: > seq12)
 - Paste the input sequence
 - Prediction of 4-digit Ec number will be shown.
