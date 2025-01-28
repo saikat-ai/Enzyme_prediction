@@ -97,7 +97,7 @@ for iteration in range(3):  # Fixed number of iterations
        ('random_forest', rf_clf),
        ('gradient_boosting', gb_clf),
        ('decision_tree',dtree),
-    ], voting='soft', , weights=[2, 2, 1]) 
+    ], voting='soft', , weights=[5, 3, 0.5]) 
     ensemble_clf.fit(X_train, y_train, sample_weight=sample_weights)
 
     # Predict probabilities for the training set
