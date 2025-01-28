@@ -6,9 +6,9 @@ from Bio import SeqIO
 from sklearn.preprocessing import LabelEncoder
 
 # Step 1: Load the saved model, tokenizer, and label encoder
-tokenizer = joblib.load("tokenizer_ensemble.joblib")  # Load tokenizer
-model = joblib.load("model5.joblib")  # Load trained model
-label_encoder = joblib.load("label_encoder.joblib")  # Load LabelEncoder for EC number decoding
+tokenizer = joblib.load("tokenizer_final.joblib")  # Load tokenizer
+model = joblib.load("model_final.joblib")  # Load trained model
+label_encoder = joblib.load("label_encoder_final.joblib")  # Load LabelEncoder for EC number decoding
 
 # Step 2: Define the k-mer extraction function
 def getKmers(sequence, size=3):
