@@ -1,4 +1,3 @@
-
 import numpy as np
 import pandas as pd
 # Import Tokenizer and pad_sequences
@@ -7,11 +6,10 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 #from keras.utils import pad_sequences
 from tensorflow.keras.preprocessing import sequence
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
 from sklearn.ensemble import VotingClassifier
 from sklearn.neural_network import MLPClassifier
-from sklearn.metrics import accuracy_score
 from sklearn.model_selection import cross_val_score, KFold
 from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
 from sklearn.metrics import confusion_matrix, classification_report, accuracy_score
@@ -23,7 +21,6 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import precision_score, recall_score, f1_score, accuracy_score
 import matplotlib.pyplot as plt
 from sklearn.metrics import precision_score
-#import pickle
 from sklearn import preprocessing
 from sklearn.preprocessing import LabelEncoder
 
@@ -78,35 +75,52 @@ y_data=pivot_df['class']
 label_encoder = LabelEncoder()
 # Fit and transform y_data
 y_true = label_encoder.fit_transform(y_data)
+# Compute the number of classes
+ec_classes = [str(ec) for ec in le.classes_]  # Convert to string for display
+n_classes = len(ec_classes)
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X_combined, y_true, test_size = 0.10, shuffle=True)
 
+# The value of gamma is set by getting the best accuracy at different values of sigma
+gamma = 2.0
+# Initialize sample weights
+sample_weights = np.ones(len(y_train))
+
+# Iterative reweighting
+for iteration in range(3):  # Fixed number of iterations
+    # Train Random Forest with current sample weights
+    rf = RandomForestClassifier(n_estimators=100, random_state=42,class_weight='balanced',n_jobs=-1)
+    gb_clf = lgb.LGBMClassifier(class_weight='balanced',n_jobs=1)
+    dtree = DecisionTreeClassifier(class_weight='balanced',max_depth=10)
+    # Create an ensemble classifier with soft voting optimized weightage
+    ensemble_clf = VotingClassifier(estimators=[
+       ('random_forest', rf_clf),
+       ('gradient_boosting', gb_clf),
+       ('decision_tree',dtree),
+    ], voting='soft', , weights=[2, 2, 1]) 
+    ensemble_clf.fit(X_train, y_train, sample_weight=sample_weights)
+
+    # Predict probabilities for the training set
+    y_pred_proba = ensemble_clf.predict_proba(X_train)
+
+    # Calculate class-wise focal weights
+    y_pred_proba_clipped = np.clip(y_pred_proba, 1e-6, 1 - 1e-6)
+    focal_weights = np.zeros_like(sample_weights)
+
+    for i, (true_class, proba) in enumerate(zip(y_train, y_pred_proba_clipped)):
+        p_t = proba[true_class]
+        focal_weights[i] = (1 - p_t) ** gamma
+
+    # Update sample weights for the next iteration
+    sample_weights = focal_weights
+
+# Final evaluation on the test set
+y_test_pred = ensemble_clf.predict(X_test)
+accuracy = accuracy_score(y_test, y_test_pred)
 #scaler=MinMaxScaler(feature_range=(-1,1))
 #X_train_scaled=scaler.fit_transform(X_train)
 #X_test_scaled=scaler.fit_transform(X_test)
-
-#from sklearn.utils import shuffle
-#x1,y_data1 = shuffle(X_train,y_train, random_state=0)
-
 unique_classes_in_test = np.unique(y_test)
-rf_clf = RandomForestClassifier(n_estimators=100,class_weight='balanced', min_samples_leaf=2, n_jobs=-1)
-gb_clf = lgb.LGBMClassifier(class_weight='balanced',n_jobs=1)
-dtree = DecisionTreeClassifier(class_weight='balanced',max_depth=10)
-
-# Create an ensemble classifier with soft voting optimized weightage
-ensemble_clf = VotingClassifier(estimators=[
-    ('random_forest', rf_clf),
-    ('gradient_boosting', gb_clf),
-    ('decision_tree',dtree),
-], voting='soft', , weights=[2, 2, 1]) 
-
-ensemble_clf.fit(X_train, y_train) ## Training done
-y_pred = ensemble_clf.predict(X_test) ## Prediction
-
-## PRINT the results
-#report = classification_report(y_test, y_pred)
-accuracy = accuracy_score(y_test, y_pred)
-
 precision = precision_score(y_test, y_pred, average='macro', zero_division=0)
 recall = recall_score(y_test, y_pred, average='macro', zero_division=0)
 f1 = f1_score(y_test, y_pred, average='macro', zero_division=0)
