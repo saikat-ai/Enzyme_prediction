@@ -24,15 +24,15 @@ def extract_features(sequence, tokenizer, max_length=500):
     seq_df['kmer_5'] = seq_df['Sequence'].apply(lambda x: getKmers(x, size=6))
 
     # Process k-mer 3
-    X_3 = tokenizers['tokenizer_3'].texts_to_sequences(seq_df['kmer_3'].values)
+    X_3 = tokenizer['tokenizer_3'].texts_to_sequences(seq_df['kmer_3'].values)
     X_3 = pad_sequences(X_3, maxlen=max_length)
 
     # Process k-mer 4
-    X_4 = tokenizers['tokenizer_4'].texts_to_sequences(seq_df['kmer_4'].values)
+    X_4 = tokenizer['tokenizer_4'].texts_to_sequences(seq_df['kmer_4'].values)
     X_4 = pad_sequences(X_4, maxlen=max_length)
 
     # Process k-mer 5
-    X_5 = tokenizers['tokenizer_5'].texts_to_sequences(seq_df['kmer_5'].values)
+    X_5 = tokenizer['tokenizer_5'].texts_to_sequences(seq_df['kmer_5'].values)
     X_5 = pad_sequences(X_5, maxlen=max_length)
 
     # Combine features
