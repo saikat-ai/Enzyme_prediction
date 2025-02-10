@@ -15,7 +15,7 @@ def getKmers(sequence, size=3):
     return [sequence[x:x+size].lower() for x in range(len(str(sequence)) - size + 1)]
 
 # Step 3: Extract features from sequence
-def extract_features(sequence, tokenizers, max_length=500):
+def extract_features(sequence, tokenizer, max_length=500):
     seq_df = pd.DataFrame({'Sequence': [sequence]})  # Convert to DataFrame
 
     # Extract k-mers for different sizes
