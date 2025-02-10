@@ -6,9 +6,9 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 def getKmers(sequence, size=3):
     return [sequence[x:x+size].lower() for x in range(len(str(sequence)) - size + 1)]
 
-tokenizer = joblib.load("tokenizer5.joblib") 
-model = joblib.load('model5.joblib')
-label_encoder = joblib.load('label_encoder5.joblib')
+tokenizer = joblib.load("tokenizer6.joblib") 
+model = joblib.load('model7.joblib')
+label_encoder = joblib.load('label_encoder7.joblib')
 
 def extract_features(sequence, tokenizer, max_length=500):
     seq_df = pd.DataFrame({'Sequence': [sequence]})
