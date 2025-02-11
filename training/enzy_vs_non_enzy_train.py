@@ -136,8 +136,7 @@ for gamma in gamma_values:
         ensemble_clf = VotingClassifier(estimators=[
             ('random_forest', rf_clf),
             ('gradient_boosting', gb_clf),
-            ('decision_tree',dtree),
-        ], voting='soft', , weights=[5, 3, 0.5])
+        ], voting='soft', , weights=[1,0.8])
         ensemble_clf.fit(X_train, y_train, sample_weight=sample_weights)
 
         # Predict probabilities and labels for the training set
