@@ -130,11 +130,19 @@ for gamma in gamma_values:
     for iteration in range(10):  # Fixed number of iterations
         # Train Random Forest with current sample weights
         rf = RandomForestClassifier(n_estimators=100, min_samples_leaf=2, n_jobs=-1)
-        rf.fit(X_train, y_train, sample_weight=sample_weights)
+        gb_clf = lgb.LGBMClassifier(class_weight='balanced',n_jobs=1)
+        dtree = DecisionTreeClassifier(class_weight='balanced',max_depth=10)
+        # Create an ensemble classifier with soft voting optimized weightage
+        ensemble_clf = VotingClassifier(estimators=[
+            ('random_forest', rf_clf),
+            ('gradient_boosting', gb_clf),
+            ('decision_tree',dtree),
+        ], voting='soft', , weights=[5, 3, 0.5])
+        ensemble_clf.fit(X_train, y_train, sample_weight=sample_weights)
 
         # Predict probabilities and labels for the training set
-        y_pred_proba = rf.predict_proba(X_train)
-        y_pred = rf.predict(X_train)
+        y_pred_proba = ensemble_clf.predict_proba(X_train)
+        y_pred = ensemble_clf.predict(X_train)
 
         # Calculate class-wise focal weights
         y_pred_proba_clipped = np.clip(y_pred_proba, 1e-6, 1 - 1e-6)
@@ -153,7 +161,7 @@ for gamma in gamma_values:
         sample_weights = focal_weights
 
         # Evaluate model performance on test set
-        y_test_pred = rf.predict(X_test)
+        y_test_pred = ensemble_clf.predict(X_test)
         accuracy = accuracy_score(y_test, y_test_pred)
         precision = precision_score(y_test, y_test_pred, average='weighted')
         recall = recall_score(y_test, y_test_pred, average='weighted')
@@ -162,7 +170,7 @@ for gamma in gamma_values:
         # Track best iteration model for the current gamma
         if accuracy > best_iteration_accuracy:
             best_iteration_accuracy = accuracy
-            best_iteration_rf = rf
+            best_iteration_ensemble_clf = ensemble_clf
             best_iteration_metrics = {
                 "iteration": iteration,
                 "precision": precision,
@@ -171,7 +179,7 @@ for gamma in gamma_values:
             }
 
     # Generate classification report
-    classification_rep = classification_report(y_test, best_iteration_rf.predict(X_test))
+    classification_rep = classification_report(y_test, best_iteration_ensemble_clf.predict(X_test))
     
     # Store best model accuracy for current gamma
     accuracies.append(best_iteration_accuracy)
@@ -190,5 +198,3 @@ for gamma in gamma_values:
         f.write(classification_rep)
         f.write("\n" + "-" * 50 + "\n")
 
-# Save the best model
-#joblib.dump(best_rf_model, "model6.joblib")
