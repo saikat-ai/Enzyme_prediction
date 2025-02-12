@@ -3,9 +3,11 @@
 This is repository of manuscript titled 'Prediction of Enzyme function using interpretable optimized Ensemble learning framework' :https://doi.org/10.1101/2025.01.28.635225
 
 1. In Datasets folder contains all the test-dataset for enzyme function prediction in different hierarchy labels
+
 2. Training folder contains two files 
 - ec_number_train.py: training script for EC number prediction of enzymes
 - enzy_vs_non_enzy_train.py: training script for enzyme vs non-enzyme binary prediction
+
 3. In prediction folder, there are three folders and feature-extraction script.
 - each folder contains script to run the prediction for a given protein sequence.(i.e:enzyme or non-enzyme prediction,enzyme top5 ec number prediction,multi-functional top5 EC number prediction)
 - feature_extraction.py extracts features from a given sequence.
