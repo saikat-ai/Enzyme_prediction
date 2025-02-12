@@ -1,5 +1,7 @@
 # SOLVE
 # Enzyme Function Prediction through subsequence tokenization and ensemble learning framework
+This is repository of manuscript titled 'Prediction of Enzyme function using interpretable optimized Ensemble learning framework':https://doi.org/10.1101/2025.01.28.635225
+
 1. In Datasets folder contains all the test-dataset for enzyme function prediction in different hierarchy labels
 2. Training folder contains two files 
 - ec_number_train.py: training script for EC number prediction of enzymes
@@ -23,7 +25,7 @@
 [3] Do you want to input another sequence? (yes/no):  
     if yes enter another sequence in same way and if no the program will be ended.
 # Requirements
-- numpy = 1.19.5
+- numpy        = 1.19.5
 - scikit-learn = 0.24.2
 - tensorflow   = 2.6.2
 - keras        = 2.6.0
