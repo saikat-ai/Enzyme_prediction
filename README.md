@@ -1,13 +1,16 @@
 # SOLVE
 # Enzyme Function Prediction through subsequence tokenization and ensemble learning framework
 1. In Datasets folder contains all the test-dataset for enzyme function prediction in different hierarchy labels
-2. Codes folder contains three files 
-- Feature_extraction.py: to extract subsequence based feature from any given protein sequence
-- train.py: train an ensemble classifier and predict the EC number for a given protein sequence
-- mono-functional_EC.py: Prediction for any unknown protein sequence
-- # Usage
+2. Training folder contains two files 
+- ec_number_train.py: training script for EC number prediction of enzymes
+- enzy_vs_non_enzy_train.py: training script for enzyme vs non-enzyme binary prediction
+3. In prediction folder, there are three folders and feature-extraction script.
+- each folder contains script to run the prediction for a given protein sequence.(i.e:enzyme or non-enzyme prediction,enzyme top5 ec number prediction,multi-functional top5 EC number prediction)
+- feature_extraction.py extracts features from a given sequence.
+
+- # Usage (ENZYME EC number prediction)
 - go to the Prediction folder.
-- download the model.joblib file from google drive
+- download the respective model.joblib, tokenizer.joblib and label_encoder.joblib file from google drive
 - Then run the enzyme_ec_numbers_with_proba.py (for promiscuous enzyme) or top-5_ec.py (for mono-funcational enzyme) script
 - When promted, enter the protein sequence in Fasta format (only sequence without any header).the script will process the input sequence and display the top-5 ec numbers along with their probability scores.
 - # Example:
