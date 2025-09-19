@@ -1,6 +1,6 @@
 # SOLVE
 # Enzyme Function Prediction through subsequence tokenization and ensemble learning framework
-This is repository of manuscript titled 'Prediction of Enzyme function using interpretable optimized Ensemble learning framework' :https://doi.org/10.1039/D5SC04513D. 
+This is repository of manuscript titled 'Prediction of Enzyme function using interpretable optimized Ensemble learning framework' :https://doi.org/10.1039/D5SC04513D. (Dhibar et al. Chemical Science 2025)
 1. In Datasets folder contains all the test-dataset for enzyme function prediction in different hierarchy labels
 
 2. Training folder contains two files 
